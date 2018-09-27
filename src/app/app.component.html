@@ -1,0 +1,17 @@
+<nz-layout>
+    <nz-sider [nzWidth]="200">
+        <ul nz-menu [nzMode]="'inline'" style="height:100%">
+            <li nz-menu-group>
+                <div title>Example</div>
+                <ul>
+                    <li nz-menu-item *ngFor="let i of data"
+                        [routerLink]="'/' + i.id"
+                        routerLinkActive="ant-menu-item-selected">{{i.title}}</li>
+                </ul>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-content class="markdown" class="bg-white doc">
+        <router-outlet></router-outlet>
+    </nz-content>
+</nz-layout>
