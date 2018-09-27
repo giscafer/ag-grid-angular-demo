@@ -29,16 +29,16 @@ import "ag-grid-enterprise";
 </div>`
 })
 export class MasterDetailComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData;
+     gridApi;
+     gridColumnApi;
+     rowData;
 
-    private columnDefs;
-    private detailCellRendererParams;
-    private detailRowHeight;
-    private defaultColDef;
+     columnDefs;
+     detailCellRendererParams;
+     detailRowHeight;
+     defaultColDef;
 
-    constructor(private http: HttpClient) {
+    constructor( private http: HttpClient) {
         this.columnDefs = [
             {
                 field: "name",

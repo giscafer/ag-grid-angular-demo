@@ -31,12 +31,12 @@ import { Component, ViewChild } from "@angular/core";
     `]
 })
 export class RowStylesComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData: any[];
+     gridApi;
+     gridColumnApi;
+     rowData: any[];
 
-    private columnDefs;
-    private rowClassRules;
+     columnDefs;
+     rowClassRules;
 
     constructor() {
         this.rowData = [

@@ -20,9 +20,9 @@ var PROFICIENCY_NAMES = ['No Filter', 'Above 40%', 'Above 60%', 'Above 80%'];
 var PROFICIENCY_VALUES = [PROFICIENCY_NONE, PROFICIENCY_ABOVE40, PROFICIENCY_ABOVE60, PROFICIENCY_ABOVE80];
 
 export default class ProficiencyFilter implements IFilter {
-    private filterChangedCallback:Function;
-    private selected:string;
-    private valueGetter:Function;
+     filterChangedCallback:Function;
+     selected:string;
+     valueGetter:Function;
 
     public init(params: IFilterParams) : void {
         this.filterChangedCallback = params.filterChangedCallback;

@@ -18,8 +18,8 @@ const FILTER_TITLE =
     '</div>';
 
 export default class SkillFilter implements IFilter {
-    private filterChangedCallback: Function;
-    private model: any;
+     filterChangedCallback: Function;
+     model: any;
 
     public init(params: IFilterParams): void {
         this.filterChangedCallback = params.filterChangedCallback;

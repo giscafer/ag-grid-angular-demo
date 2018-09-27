@@ -15,14 +15,14 @@ import { HttpClient } from "@angular/common/http";
     ></ag-grid-angular>`
 })
 export class CellStylesComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData: any[];
+     gridApi;
+     gridColumnApi;
+     rowData: any[];
 
-    private columnDefs;
-    private defaultColDef;
+     columnDefs;
+     defaultColDef;
 
-    constructor(private http: HttpClient) {
+    constructor( private http: HttpClient) {
         this.columnDefs = [
             {
                 headerName: "Athlete",

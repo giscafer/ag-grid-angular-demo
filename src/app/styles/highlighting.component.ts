@@ -28,13 +28,13 @@ import { Component } from "@angular/core";
     `]
 })
 export class HighlightingComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData;
+     gridApi;
+     gridColumnApi;
+     rowData;
 
-    private columnDefs;
+     columnDefs;
 
-    constructor(private http: HttpClient) {
+    constructor( private http: HttpClient) {
         this.columnDefs = [
             {
                 headerName: "Participant",

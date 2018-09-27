@@ -13,7 +13,7 @@ interface MyParams extends IHeaderParams {
 export class HeaderComponent implements IHeaderAngularComp {
     public params: MyParams;
     public sorted: string;
-    private elementRef: ElementRef;
+     elementRef: ElementRef;
 
     constructor(elementRef: ElementRef) {
         this.elementRef = elementRef;
@@ -48,7 +48,7 @@ export class HeaderComponent implements IHeaderAngularComp {
     };
 
 
-    private querySelector(selector: string) {
+     querySelector(selector: string) {
         return <HTMLElement>this.elementRef.nativeElement.querySelector(
             '.customHeaderMenuButton', selector);
     }

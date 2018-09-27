@@ -19,13 +19,13 @@ import { HttpClient } from "@angular/common/http";
 `
 })
 export class ColumnGroupComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData;
+     gridApi;
+     gridColumnApi;
+     rowData;
 
-    private columnDefs;
+     columnDefs;
 
-    constructor(private http: HttpClient) {
+    constructor( private http: HttpClient) {
         this.columnDefs = [
             {
                 headerName: "Athlete Details",

@@ -29,14 +29,14 @@ import "ag-grid-enterprise";
 `
 })
 export class TreeDataComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData: any[];
+     gridApi;
+     gridColumnApi;
+     rowData: any[];
 
-    private columnDefs;
-    private groupDefaultExpanded;
-    private getDataPath;
-    private autoGroupColumnDef;
+     columnDefs;
+     groupDefaultExpanded;
+     getDataPath;
+     autoGroupColumnDef;
 
     constructor() {
         this.columnDefs = [{ field: "jobTitle" }, { field: "employmentType" }];

@@ -9,8 +9,8 @@ import { IDateAngularComp } from "ag-grid-angular/main";
     styleUrls: ['date.component.css'],
 })
 export class DateComponent implements IDateAngularComp, OnDestroy {
-    private date: Date;
-    private params: IDateParams;
+     date: Date;
+     params: IDateParams;
     public dd = '';
     public mm = '';
     public yyyy = '';

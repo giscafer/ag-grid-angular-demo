@@ -22,12 +22,12 @@ import { Component, ViewChild } from "@angular/core";
 </div>`
 })
 export class CellRenderingComponent {
-    private gridApi;
-    private gridColumnApi;
+     gridApi;
+     gridColumnApi;
 
-    private columnDefs;
-    private defaultColDef;
-    private rowData;
+     columnDefs;
+     defaultColDef;
+     rowData;
 
     constructor() {
         this.columnDefs = [

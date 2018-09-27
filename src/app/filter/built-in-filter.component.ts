@@ -16,13 +16,13 @@ import { Component } from "@angular/core";
 `
 })
 export class BuiltInFilterComponent {
-    private gridApi;
-    private gridColumnApi;
-    private rowData: any[];
+     gridApi;
+     gridColumnApi;
+     rowData: any[];
 
-    private columnDefs;
+     columnDefs;
 
-    constructor(private http: HttpClient) {
+    constructor( private http: HttpClient) {
         this.columnDefs = [
             {
                 headerName: "Athlete",
