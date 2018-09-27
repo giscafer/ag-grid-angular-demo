@@ -28,7 +28,6 @@
     "ag-grid": "^18.0.0",
     "ag-grid-angular": "^18.0.0",
     "ag-grid-enterprise": "^18.0.0",
-    "bootstrap": "3.3.7",
     "core-js": "2.5.5",
     "ng-zorro-antd": "^1.6.0",
     "rxjs": "6.2.0",

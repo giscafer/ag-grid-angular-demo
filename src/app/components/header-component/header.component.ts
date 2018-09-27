@@ -1,6 +1,6 @@
-import {Component, ElementRef} from "@angular/core";
-import {IHeaderParams} from "ag-grid/main";
-import {IHeaderAngularComp} from "ag-grid-angular/main";
+import { Component, ElementRef, OnDestroy } from "@angular/core";
+import { IHeaderParams } from "ag-grid/main";
+import { IHeaderAngularComp } from "ag-grid-angular/main";
 
 interface MyParams extends IHeaderParams {
     menuIcon: string;
@@ -10,10 +10,10 @@ interface MyParams extends IHeaderParams {
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.css']
 })
-export class HeaderComponent implements IHeaderAngularComp {
+export class HeaderComponent implements IHeaderAngularComp, OnDestroy {
     public params: MyParams;
     public sorted: string;
-     elementRef: ElementRef;
+    elementRef: ElementRef;
 
     constructor(elementRef: ElementRef) {
         this.elementRef = elementRef;
@@ -48,7 +48,7 @@ export class HeaderComponent implements IHeaderAngularComp {
     };
 
 
-     querySelector(selector: string) {
+    querySelector(selector: string) {
         return <HTMLElement>this.elementRef.nativeElement.querySelector(
             '.customHeaderMenuButton', selector);
     }
