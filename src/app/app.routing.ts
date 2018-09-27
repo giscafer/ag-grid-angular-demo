@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { RichGridComponent } from './rich-grid-example/rich-grid.component';
 import { BuiltInFilterComponent } from './filter/built-in-filter.component';
 import { AgGridModule } from 'ag-grid-angular';
@@ -15,6 +15,7 @@ import { RTLComplexComponent } from './basic/rtl-complex.component';
 import { CellRenderingComponent } from './styles/cell-rendering.component';
 import { PinnedColumnComponent } from './basic/pinned-column.components';
 import { HighlightingComponent } from './styles/highlighting.component';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
     { path: 'pinned-column', component: PinnedColumnComponent },
@@ -40,8 +41,11 @@ export const appRouting = RouterModule.forRoot(routes);
 
 @NgModule({
     imports: [
-        RouterModule,
         CommonModule,
+        RouterModule.forRoot(routes, environment.production ? {
+            useHash: true,
+            preloadingStrategy: PreloadAllModules
+        } : { useHash: true }),
         appRouting,
         AgGridModule.withComponents([]),
     ],
