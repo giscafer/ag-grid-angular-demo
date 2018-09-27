@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
     style="width: 100%; height: 100%;"
     id="myGrid"
     [rowData]="rowData"
-    class="ag-theme-balham"
+    class="ag-theme-material"
     [columnDefs]="columnDefs"
     [defaultColDef]="defaultColDef"
     (gridReady)="onGridReady($event)"
