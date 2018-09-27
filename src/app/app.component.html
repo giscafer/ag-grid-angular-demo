@@ -4,9 +4,56 @@
             <li nz-menu-group>
                 <div title>Example</div>
                 <ul>
-                    <li nz-menu-item *ngFor="let i of data"
-                        [routerLink]="'/' + i.id"
-                        routerLinkActive="ant-menu-item-selected">{{i.title}}</li>
+                    <li nz-menu-item
+                        routerLink="/column-group"
+                        routerLinkActive="ant-menu-item-selected">Column Group</li>
+                    <li nz-menu-item
+                        routerLink="/rtl-complex"
+                        routerLinkActive="ant-menu-item-selected">RTL</li>
+                </ul>
+            </li>
+            <li nz-menu-group>
+                <div title>Column Filter Example</div>
+                <ul>
+                    <li nz-menu-item
+                        routerLink="/filter-floating"
+                        routerLinkActive="ant-menu-item-selected">Floating
+                        filters</li>
+                    <li nz-menu-item
+                        routerLink="/filter-builtin"
+                        routerLinkActive="ant-menu-item-selected">Built In
+                        Filters</li>
+                    <li nz-menu-item
+                        routerLink="/filter-api"
+                        routerLinkActive="ant-menu-item-selected">Filter API</li>
+                </ul>
+            </li>
+            <li nz-menu-group>
+                <div title>Styles Example</div>
+                <ul>
+                    <li nz-menu-item
+                        routerLink="/cell-styles"
+                        routerLinkActive="ant-menu-item-selected">Cell Styles</li>
+                    <li nz-menu-item
+                        routerLink="/row-styles"
+                        routerLinkActive="ant-menu-item-selected">Row Styles</li>
+                    <li nz-menu-item
+                        routerLink="/cell-rendering"
+                        routerLinkActive="ant-menu-item-selected">Cell Rendering</li>
+                </ul>
+            </li>
+            <li nz-menu-group>
+                <div title>Enterprise Example (need license)</div>
+                <ul>
+                    <li nz-menu-item
+                        routerLink="/tree-data"
+                        routerLinkActive="ant-menu-item-selected">Tree Data</li>
+                    <li nz-menu-item
+                        routerLink="/master-detail"
+                        routerLinkActive="ant-menu-item-selected">Master/Detail</li>
+                    <li nz-menu-item
+                        routerLink="/rich-grid"
+                        routerLinkActive="ant-menu-item-selected">Rich Grid</li>
                 </ul>
             </li>
         </ul>

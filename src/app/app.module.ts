@@ -18,6 +18,7 @@ import { AppRoutingModule } from "./app.routing";
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { RouterModule } from "@angular/router";
+import { HttpClientModule } from "@angular/common/http";
 registerLocaleData(zh);
 
 
@@ -25,14 +26,16 @@ registerLocaleData(zh);
     imports: [
         BrowserModule,
         FormsModule,
-        AgGridModule.withComponents(
-            [
-                DateComponent,
-                HeaderComponent,
-                HeaderGroupComponent
-            ]
-        ),
-        // AgGridModule,
+        HttpClientModule,
+        // custom component
+        /*   AgGridModule.withComponents(
+              [
+                  DateComponent,
+                  HeaderComponent,
+                  HeaderGroupComponent
+              ]
+          ), */
+        AgGridModule.withComponents([]),
         AppRoutingModule,
         /** 导入 ng-zorro-antd 模块 **/
         NgZorroAntdModule,
@@ -40,7 +43,6 @@ registerLocaleData(zh);
     ],
     declarations: [
         AppComponent,
-        RichGridComponent,
         DateComponent,
         HeaderComponent,
         HeaderGroupComponent

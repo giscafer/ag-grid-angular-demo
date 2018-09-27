@@ -26,7 +26,7 @@
             "styles": [
               "node_modules/ag-grid/dist/styles/ag-grid.css",
               "node_modules/ag-grid/dist/styles/theme-fresh.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ag-grid/dist/styles/ag-theme-balham.css",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []

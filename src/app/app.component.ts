@@ -9,18 +9,14 @@ import { Component } from "@angular/core";
             background:#fff;
         }
         .doc {
-                padding: 30px 20px 40px 40px!important;
+            position:relative;
+            padding: 30px 20px 40px 40px!important;
+            min-height: 700px;
          }
         `]
 })
 export class AppComponent {
-    data = [{
-        id: 'rich-grid',
-        title: 'Rich Grid',
-    },
-    {
-        id: 'schema',
-        title: 'Schema',
-    }];
+
 }
+
 
