@@ -6,6 +6,7 @@ import { Component, ViewChild } from "@angular/core";
 <div style="height: 100%; padding-top: 40px; box-sizing: border-box;">
     <ag-grid-angular
     #agGrid
+    showToolPanel
     style="width: 100%; height: 100%;"
     id="myGrid"
     [rowData]="rowData"

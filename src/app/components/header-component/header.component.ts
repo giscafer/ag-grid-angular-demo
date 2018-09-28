@@ -10,7 +10,7 @@ interface MyParams extends IHeaderParams {
     templateUrl: 'header.component.html',
     styleUrls: ['header.component.css']
 })
-export class HeaderComponent implements IHeaderAngularComp, OnDestroy {
+export class HeaderComponent implements OnDestroy {
     public params: MyParams;
     public sorted: string;
     elementRef: ElementRef;
@@ -19,11 +19,11 @@ export class HeaderComponent implements IHeaderAngularComp, OnDestroy {
         this.elementRef = elementRef;
     }
 
-    agInit(params: MyParams): void {
-        this.params = params;
-        this.params.column.addEventListener('sortChanged', this.onSortChanged.bind(this));
-        this.onSortChanged();
-    }
+    // agInit(params: MyParams): void {
+    //     this.params = params;
+    //     this.params.column.addEventListener('sortChanged', this.onSortChanged.bind(this));
+    //     this.onSortChanged();
+    // }
 
     ngOnDestroy() {
         console.log(`Destroying HeaderComponent`);

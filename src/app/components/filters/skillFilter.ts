@@ -1,4 +1,4 @@
-import RefData from '../../data/refData';
+import RefData from '../refData';
 import { IFilter, IFilterParams } from "ag-grid/main";
 
 const SKILL_TEMPLATE =
@@ -18,8 +18,8 @@ const FILTER_TITLE =
     '</div>';
 
 export default class SkillFilter implements IFilter {
-     filterChangedCallback: Function;
-     model: any;
+    filterChangedCallback: Function;
+    model: any;
 
     public init(params: IFilterParams): void {
         this.filterChangedCallback = params.filterChangedCallback;

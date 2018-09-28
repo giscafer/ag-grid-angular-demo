@@ -3,7 +3,7 @@ import { GridOptions } from "ag-grid/main";
 
 import ProficiencyFilter from '../components/filters/proficiencyFilter';
 import SkillFilter from '../components/filters/skillFilter';
-import RefData from '../data/refData';
+import RefData from '../components/refData';
 
 // only import this if you are using the ag-Grid-Enterprise
 import 'ag-grid-enterprise/main';
@@ -20,10 +20,10 @@ import { HeaderComponent } from "../components/header-component/header.component
 })
 export class RichGridComponent {
 
-     gridOptions: GridOptions;
+    gridOptions: GridOptions;
     public showGrid: boolean;
     public rowData: any[];
-     columnDefs: any[];
+    columnDefs: any[];
     public rowCount: string;
     // public dateComponentFramework: DateComponent;
     // public HeaderGroupComponent = HeaderGroupComponent;
@@ -44,7 +44,7 @@ export class RichGridComponent {
          } */
     }
 
-     createRowData() {
+    createRowData() {
         let rowData: any[] = [];
 
         for (let i = 0; i < 200; i++) {
@@ -73,7 +73,7 @@ export class RichGridComponent {
         this.rowData = rowData;
     }
 
-     createColumnDefs() {
+    createColumnDefs() {
         this.columnDefs = [
             {
                 headerName: '#', width: 30, checkboxSelection: true, suppressSorting: true,
@@ -131,7 +131,7 @@ export class RichGridComponent {
         ];
     }
 
-     calculateRowCount() {
+    calculateRowCount() {
         if (this.gridOptions.api && this.rowData) {
             let model = this.gridOptions.api.getModel();
             let totalRows = this.rowData.length;
@@ -140,7 +140,7 @@ export class RichGridComponent {
         }
     }
 
-     onModelUpdated() {
+    onModelUpdated() {
         console.log('onModelUpdated');
         this.calculateRowCount();
     }
@@ -150,62 +150,62 @@ export class RichGridComponent {
         this.calculateRowCount();
     }
 
-     onCellClicked($event) {
+    onCellClicked($event) {
         console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
-     onCellValueChanged($event) {
+    onCellValueChanged($event) {
         console.log('onCellValueChanged: ' + $event.oldValue + ' to ' + $event.newValue);
     }
 
-     onCellDoubleClicked($event) {
+    onCellDoubleClicked($event) {
         console.log('onCellDoubleClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
-     onCellContextMenu($event) {
+    onCellContextMenu($event) {
         console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
-     onCellFocused($event) {
+    onCellFocused($event) {
         console.log('onCellFocused: (' + $event.rowIndex + ',' + $event.colIndex + ')');
     }
 
-     onRowSelected($event) {
+    onRowSelected($event) {
         // taking out, as when we 'select all', it prints to much to the console!!
         // console.log('onRowSelected: ' + $event.node.data.name);
     }
 
-     onSelectionChanged() {
+    onSelectionChanged() {
         console.log('selectionChanged');
     }
 
-     onBeforeFilterChanged() {
+    onBeforeFilterChanged() {
         console.log('beforeFilterChanged');
     }
 
-     onAfterFilterChanged() {
+    onAfterFilterChanged() {
         console.log('afterFilterChanged');
     }
 
-     onFilterModified() {
+    onFilterModified() {
         console.log('onFilterModified');
     }
 
-     onBeforeSortChanged() {
+    onBeforeSortChanged() {
         console.log('onBeforeSortChanged');
     }
 
-     onAfterSortChanged() {
+    onAfterSortChanged() {
         console.log('onAfterSortChanged');
     }
 
-     onVirtualRowRemoved($event) {
+    onVirtualRowRemoved($event) {
         // because this event gets fired LOTS of times, we don't print it to the
         // console. if you want to see it, just uncomment out this line
         // console.log('onVirtualRowRemoved: ' + $event.rowIndex);
     }
 
-     onRowClicked($event) {
+    onRowClicked($event) {
         console.log('onRowClicked: ' + $event.node.data.name);
     }
 
@@ -215,7 +215,7 @@ export class RichGridComponent {
 
     // here we use one generic event to handle all the column type events.
     // the method just prints the event name
-     onColumnEvent($event) {
+    onColumnEvent($event) {
         console.log('onColumnEvent: ' + $event);
     }
 

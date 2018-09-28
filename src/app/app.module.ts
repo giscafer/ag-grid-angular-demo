@@ -1,24 +1,26 @@
+/** 配置 angular i18n **/
+import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from "@angular/common/http";
+import zh from '@angular/common/locales/zh';
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule } from "@angular/router";
 // ag-grid
 import { AgGridModule } from "ag-grid-angular/main";
 // zorro
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+// apollo & graphql
+import { Apollo, ApolloModule } from 'apollo-angular';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 // application
 import { AppComponent } from "./app.component";
-// rich grid
-import { RichGridComponent } from "./rich-grid-example/rich-grid.component";
+import { AppRoutingModule } from "./app.routing";
 import { DateComponent } from "./components/date-component/date.component";
 import { HeaderComponent } from "./components/header-component/header.component";
 import { HeaderGroupComponent } from "./components/header-group-component/header-group.component";
-import { AppRoutingModule } from "./app.routing";
 
-/** 配置 angular i18n **/
-import { registerLocaleData } from '@angular/common';
-import zh from '@angular/common/locales/zh';
-import { RouterModule } from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
 registerLocaleData(zh);
 
 
@@ -27,6 +29,8 @@ registerLocaleData(zh);
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        HttpLinkModule,
+        ApolloModule,
         // custom component
         /*   AgGridModule.withComponents(
               [
@@ -51,4 +55,12 @@ registerLocaleData(zh);
     bootstrap: [AppComponent]
 })
 export class AppModule {
+    constructor(apollo: Apollo, httpLink: HttpLink) {
+        apollo.create({
+            // By default, this client will send queries to the
+            // `/graphql` endpoint on the same host
+            link: httpLink.create({ uri: 'https://www.graphqlhub.com/graphql' }),
+            cache: new InMemoryCache(),
+        });
+    }
 }

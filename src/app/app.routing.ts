@@ -16,15 +16,21 @@ import { CellRenderingComponent } from './styles/cell-rendering.component';
 import { PinnedColumnComponent } from './basic/pinned-column.components';
 import { HighlightingComponent } from './styles/highlighting.component';
 import { environment } from '../environments/environment';
+import { Binding2GraphqlComponent } from './binding/binding-graphql.component';
+import { Binding2WebsocketComponent } from './binding/binding-websocket.component';
 
 const routes: Routes = [
+    // binding data
+    { path: 'banding-graphql', component: Binding2GraphqlComponent },
+    { path: 'banding-socket', component: Binding2WebsocketComponent },
+    //  s
     { path: 'pinned-column', component: PinnedColumnComponent },
     { path: 'column-group', component: ColumnGroupComponent },
     { path: 'rtl-complex', component: RTLComplexComponent },
     { path: 'filter-floating', component: FloatingFilterComponent },
     { path: 'filter-builtin', component: BuiltInFilterComponent },
     { path: 'filter-api', component: FilterApiComponent },
-
+    // styles
     { path: 'cell-styles', component: CellStylesComponent },
     { path: 'row-styles', component: RowStylesComponent },
     { path: 'cell-rendering', component: CellRenderingComponent },
@@ -37,16 +43,15 @@ const routes: Routes = [
     { path: '**', pathMatch: 'full', redirectTo: 'rich-grid' }
 ];
 
-export const appRouting = RouterModule.forRoot(routes);
+export const AppRouting = RouterModule.forRoot(routes, environment.production ? {
+    useHash: true,
+    preloadingStrategy: PreloadAllModules
+} : { useHash: true });
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forRoot(routes, environment.production ? {
-            useHash: true,
-            preloadingStrategy: PreloadAllModules
-        } : { useHash: true }),
-        appRouting,
+        AppRouting,
         AgGridModule.withComponents([]),
     ],
     declarations: [
@@ -63,6 +68,8 @@ export const appRouting = RouterModule.forRoot(routes);
         CellRenderingComponent,
         PinnedColumnComponent,
         HighlightingComponent,
+        Binding2GraphqlComponent,
+        Binding2WebsocketComponent,
     ]
 })
 export class AppRoutingModule { }

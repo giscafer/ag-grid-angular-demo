@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
   <h3>字段设置pinned:true 即可</h3>
   <ag-grid-angular
     #agGrid
-    style="width: 800px; height: 100%;"
+    style="width: 800px; height: 90%;"
     id="myGrid"
     [rowData]="rowData"
     class="ag-theme-balham"

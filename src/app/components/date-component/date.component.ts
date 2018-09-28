@@ -8,16 +8,12 @@ import { IDateAngularComp } from "ag-grid-angular/main";
     templateUrl: 'date.component.html',
     styleUrls: ['date.component.css'],
 })
-export class DateComponent implements IDateAngularComp, OnDestroy {
-     date: Date;
-     params: IDateParams;
+export class DateComponent implements OnDestroy {
+    date: Date;
+    params: IDateParams;
     public dd = '';
     public mm = '';
     public yyyy = '';
-
-    agInit(params: IDateParams): void {
-        this.params = params;
-    }
 
     ngOnDestroy() {
         console.log(`Destroying DateComponent`);

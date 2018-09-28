@@ -1,8 +1,21 @@
-<nz-layout>
-    <nz-sider [nzWidth]="200">
-        <ul nz-menu [nzMode]="'inline'" style="height:100%">
+<nz-layout style="position: relative;height: 100%;">
+    <nz-sider [nzWidth]="200" style="height:100%; overflow-y: auto">
+        <ul nz-menu [nzMode]="'inline'">
             <li nz-menu-group>
-                <div title>Example</div>
+                <div title>Data Binding Example</div>
+                <ul>
+                    <li nz-menu-item
+                        routerLink="/banding-socket"
+                        routerLinkActive="ant-menu-item-selected">Binding to
+                        WebSocket</li>
+                    <li nz-menu-item
+                        routerLink="/banding-graphql"
+                        routerLinkActive="ant-menu-item-selected">Binding to
+                        GraphQL</li>
+                </ul>
+            </li>
+            <li nz-menu-group>
+                <div title>Group Example</div>
                 <ul>
                     <li nz-menu-item
                         routerLink="/column-group"

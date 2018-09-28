@@ -24,10 +24,10 @@
               "src/images"
             ],
             "styles": [
-              "node_modules/ag-grid/dist/styles/ag-grid.css",
-              "node_modules/ag-grid/dist/styles/theme-fresh.css",
-              "node_modules/ag-grid/dist/styles/ag-theme-balham.css",
-              "node_modules/ag-grid/dist/styles/ag-theme-blue.css",
+              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-fresh.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-balham.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-blue.css",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
