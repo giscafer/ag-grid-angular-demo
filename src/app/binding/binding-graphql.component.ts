@@ -12,7 +12,7 @@ import { GraphQLService, HackerNewsItem } from './graphql.service';
         #agGrid
         style="width: 100%; height: 600px;"
         id="myGrid"
-        [rowData]="rowData"
+        [(rowData)]="rowData"
         class="ag-theme-balham"
         [columnDefs]="columnDefs"
         [floatingFilter]="true"
@@ -33,29 +33,14 @@ export class Binding2GraphqlComponent implements OnInit {
 
     gridApi;
 
-
-    /* {
-        hn {
-          topStories(limit:50){
-            id,
-            type,
-            text,
-            url,
-            score,
-            title,
-            timeISO
-          }
-        }
-      } */
-
     constructor(
         private http: HttpClient,
         private graphqlSrv: GraphQLService,
     ) {
         this.columnDefs = [
             {
-                headerName: "Athlete",
-                field: "athlete",
+                headerName: "ID",
+                field: "id",
                 width: 150,
                 filter: "agTextColumnFilter",
                 suppressMenu: true,
@@ -64,30 +49,30 @@ export class Binding2GraphqlComponent implements OnInit {
                 checkboxSelection: true
             },
             {
-                headerName: "Age",
-                field: "age",
+                headerName: "Type",
+                field: "type",
                 width: 90,
-                filter: "agNumberColumnFilter",
+                filter: "agTextColumnFilter",
                 suppressMenu: true
             },
             {
-                headerName: "Country",
-                field: "country",
-                width: 120,
-                filter: "agSetColumnFilter",
+                headerName: "Title",
+                field: "title",
+                width: 280,
+                filter: "agTextColumnFilter",
                 suppressMenu: true
             },
             {
-                headerName: "Year",
-                field: "year",
+                headerName: "Score",
+                field: "score",
                 width: 90,
                 filter: "agNumberColumnFilter",
                 suppressMenu: true
             },
             {
                 headerName: "Date",
-                field: "date",
-                width: 145,
+                field: "timeISO",
+                width: 165,
                 filter: "agDateColumnFilter",
                 filterParams: {
                     comparator: function (filterLocalDateAtMidnight, cellValue) {
@@ -110,40 +95,11 @@ export class Binding2GraphqlComponent implements OnInit {
                 suppressMenu: true
             },
             {
-                headerName: "Sport",
-                field: "sport",
-                width: 110,
+                headerName: "Url",
+                field: "url",
+                width: 400,
                 suppressMenu: true,
                 filter: "agTextColumnFilter"
-            },
-            {
-                headerName: "Gold",
-                field: "gold",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                filterParams: { applyButton: true },
-                suppressMenu: true
-            },
-            {
-                headerName: "Silver",
-                field: "silver",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                floatingFilterComponentParams: { suppressFilterButton: true }
-            },
-            {
-                headerName: "Bronze",
-                field: "bronze",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                floatingFilterComponentParams: { suppressFilterButton: true }
-            },
-            {
-                headerName: "Total",
-                field: "total",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                suppressFilter: true
             }
         ];
     }

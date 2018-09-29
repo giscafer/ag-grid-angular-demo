@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NzMessageService } from 'ng-zorro-antd';
 
+declare let WebSocket: any;
 @Component({
     selector: 'binding-websocket',
     template: `
     <div>
         <h3>Data Binding to Websocket</h3>
+        <p>WebSocket service use wss://kendoui-ws-demo.herokuapp.com</p>
+        <p>Test: <a href="javascript:;" (click)="openNewTab()">点击打开新的页面</a>，操作新增记录，删除记录，看 WebSocket 效果 </p>
+        <button nz-button nzType="default" (click)="create()">Add Item</button>
+        <button nz-button nzType="default" (click)="onRemoveSelected()">Remove Selected</button>
         <ag-grid-angular
         #agGrid
         style="width: 100%; height: 600px;"
         id="myGrid"
+        rowSelection='multiple'
         [rowData]="rowData"
         class="ag-theme-balham"
         [columnDefs]="columnDefs"
@@ -22,7 +29,7 @@ import { HttpClient } from '@angular/common/http';
     </div>
     `
 })
-export class Binding2WebsocketComponent implements OnInit {
+export class Binding2WebsocketComponent implements OnInit, OnDestroy {
 
     rowData: any[];
 
@@ -30,12 +37,15 @@ export class Binding2WebsocketComponent implements OnInit {
 
     gridApi;
 
+    ws: WebSocket;
 
-    constructor(private http: HttpClient) {
+    host = "wss://kendoui-ws-demo.herokuapp.com/";
+
+    constructor(private http: HttpClient, private msg: NzMessageService) {
         this.columnDefs = [
             {
-                headerName: "Athlete",
-                field: "athlete",
+                headerName: "UnitPrice",
+                field: "UnitPrice",
                 width: 150,
                 filter: "agTextColumnFilter",
                 suppressMenu: true,
@@ -44,93 +54,36 @@ export class Binding2WebsocketComponent implements OnInit {
                 checkboxSelection: true
             },
             {
-                headerName: "Age",
-                field: "age",
-                width: 90,
+                headerName: "ProductName",
+                field: "ProductName",
+                width: 200,
                 filter: "agNumberColumnFilter",
                 suppressMenu: true
             },
             {
-                headerName: "Country",
-                field: "country",
-                width: 120,
-                filter: "agSetColumnFilter",
-                suppressMenu: true
+                headerName: "CreatedAt",
+                field: "CreatedAt",
+                width: 220
             },
-            {
-                headerName: "Year",
-                field: "year",
-                width: 90,
-                filter: "agNumberColumnFilter",
-                suppressMenu: true
-            },
-            {
-                headerName: "Date",
-                field: "date",
-                width: 145,
-                filter: "agDateColumnFilter",
-                filterParams: {
-                    comparator: function (filterLocalDateAtMidnight, cellValue) {
-                        let dateAsString = cellValue;
-                        if (dateAsString == null) return -1;
-                        let dateParts = dateAsString.split("/");
-                        let cellDate = new Date(Number(dateParts[2]), Number(dateParts[1]) - 1, Number(dateParts[0]));
-                        if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-                            return 0;
-                        }
-                        if (cellDate < filterLocalDateAtMidnight) {
-                            return -1;
-                        }
-                        if (cellDate > filterLocalDateAtMidnight) {
-                            return 1;
-                        }
-                    },
-                    browserDatePicker: true
-                },
-                suppressMenu: true
-            },
-            {
-                headerName: "Sport",
-                field: "sport",
-                width: 110,
-                suppressMenu: true,
-                filter: "agTextColumnFilter"
-            },
-            {
-                headerName: "Gold",
-                field: "gold",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                filterParams: { applyButton: true },
-                suppressMenu: true
-            },
-            {
-                headerName: "Silver",
-                field: "silver",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                floatingFilterComponentParams: { suppressFilterButton: true }
-            },
-            {
-                headerName: "Bronze",
-                field: "bronze",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                floatingFilterComponentParams: { suppressFilterButton: true }
-            },
-            {
-                headerName: "Total",
-                field: "total",
-                width: 100,
-                filter: "agNumberColumnFilter",
-                suppressFilter: true
-            }
         ];
     }
 
 
     ngOnInit() {
+        if (typeof WebSocket === "undefined") {
+            this.msg.error('Your Broswer not support for WebScoket');
+            return;
+        }
+        this.ws = new (<any>window).WebSocket(this.host);
+        this.ws.onopen = (ev) => {
+            console.log(ev);
+            let request = { type: "read" };
 
+            this.send(request, result => {
+                console.log(result);
+                this.rowData = result.data;
+            });
+        }
     }
 
 
@@ -142,11 +95,118 @@ export class Binding2WebsocketComponent implements OnInit {
 
     onGridReady(params) {
         this.gridApi = params.api;
+        console.log(params)
+    }
 
-        this.http
-            .get("https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinners.json")
-            .subscribe((data: any[]) => {
-                this.rowData = data;
+
+    create() {
+        let request = {
+            type: "create", data: [{
+                UnitPrice: 0,
+                ProductName: '',
+            }]
+        };
+        this.ws.send(JSON.stringify(request));
+    }
+
+    onRemoveSelected() {
+        let selectedData = this.gridApi.getSelectedRows();
+        if (selectedData.length === 0) {
+            return this.msg.warning('请选择记录！');
+        }
+        let request = {
+            type: "update", data: selectedData
+        };
+        this.ws.send(JSON.stringify(request));
+    }
+
+    removeRow(items) {
+
+        let prodIds = items.map(item => item.ProductID);
+        let removeRows = [];
+        for (let row of this.rowData) {
+            if (prodIds.includes(row.ProductID)) {
+                removeRows.push(row);
+            }
+        }
+        let res = this.gridApi.updateRowData({ remove: removeRows });
+        this.printResult(res);
+    }
+
+    addRow(newItem) {
+        this.rowData.unshift(newItem);
+        let res = this.gridApi.updateRowData({ add: [newItem], addIndex: 0 });
+        this.printResult(res);
+    }
+
+
+    send(request, callback) {
+        if (this.ws.readyState != 1) {
+            alert("Socket was closed. Please reload the page.");
+            return;
+        }
+
+        //Assign unique id to the request. Will use that to distinguish the response.
+        request.id = `${Math.random().toString(16).substr(2)}${Math.random().toString(16).substr(2)}`;
+
+        // assign it to a variable
+        const lisenerHandler = e => {
+            let result = JSON.parse(e.data);
+
+            //Check if the response is for the current request
+            if (result.id == request.id) {
+                //Stop listening
+                // this.ws.removeEventListener("message", lisenerHandler);
+
+                //Invoke the callback with the result
+                callback(result);
+            } else {
+                if (result.type === 'push-create' || result.type === 'create') {
+                    if (result.type === 'push-create') {
+                        this.msg.info('监听到 新增 记录');
+                    }
+                    this.addRow(result.data[0]);
+                } else if (result.type === 'push-update' || result.type === 'update') {
+                    if (result.type === 'push-update') {
+                        this.msg.info('监听到 删除 记录');
+                    }
+                    this.removeRow(result.data);
+                }
+            }
+        }
+        //Listen to the "message" event to get server response
+        this.ws.removeEventListener("message", lisenerHandler);
+        this.ws.addEventListener("message", lisenerHandler);
+
+        //Send the data to the server
+        this.ws.send(JSON.stringify(request));
+    }
+
+    printResult(res) {
+        console.log("---------------------------------------");
+        if (res.add) {
+            res.add.forEach(function (rowNode) {
+                console.log("Added Row Node", rowNode);
             });
+        }
+        if (res.remove) {
+            res.remove.forEach(function (rowNode) {
+                console.log("Removed Row Node", rowNode);
+            });
+        }
+        if (res.update) {
+            res.update.forEach(function (rowNode) {
+                console.log("Updated Row Node", rowNode);
+            });
+        }
+    }
+
+    openNewTab() {
+        let url = `${location.protocol}//${location.host}/#/banding-socket`;
+        window.open(url);
+    }
+
+    ngOnDestroy(): void {
+        this.ws.close();
     }
 }
